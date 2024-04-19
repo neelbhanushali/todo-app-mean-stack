@@ -20,6 +20,7 @@ describe("POST /api/users/register", () => {
   it("Should return 404 for Get", async () => {
     const res = await request(app).get(uri);
     expect(res.statusCode).toBe(404);
+    expect(res.body.message).toBe('Route not found')
   });
 
   it("User should get created", async () => {

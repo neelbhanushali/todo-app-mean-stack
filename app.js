@@ -4,15 +4,16 @@ const app = express()
 const port = process.env.PORT
 const swaggerJsdoc = require("swagger-jsdoc")
 const swaggerUi = require("swagger-ui-express")
+const respond = require('./responder')
 
 app.use(express.json())
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  return respond.withSuccess(res, data=[], msg='Hello World!')
 })
 
 app.use('/api', require('./src'))
 app.get('*', function(req, res){
-  res.status(404).send()
+  return respond.withNotFound(res, msg='Route not found')
 });
 
 const options = {

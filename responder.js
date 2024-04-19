@@ -19,5 +19,14 @@ module.exports = {
       error
     }
     return respond(res, statusCode, obj)
+  },
+
+  withNotFound(res, msg='Not Found', statusCode=404) {
+    const obj = {
+      message: msg,
+      data: [],
+      error: []
+    }
+    return respond(res, statusCode, obj)
   }
 }
