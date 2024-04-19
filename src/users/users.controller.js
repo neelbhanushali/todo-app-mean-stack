@@ -2,6 +2,7 @@ const router = require("express").Router();
 const expressValidator = require('express-validator')
 const userService = require('./users.service')
 const UserModel = require('./users.model')
+const respond = require('../../responder')
 
 /**
  * @swagger
@@ -58,12 +59,12 @@ const registerValidator = [
 router.post('/register', registerValidator, async (req, res) => {
     const errors = expressValidator.validationResult(req)
     if(!errors.isEmpty()) {
-      return res.status(422).json({errors: errors.array({onlyFirstError: true})})
+      return respond.withValidationError(res, error=errors.array({onlyFirstError: true}))
     }
     
     await userService.registerUser(req.body)
 
-    return res.json({msg: 'register done'})
+    return respond.withSuccess(res, data=[], msg='Registration done')
 })
 
 router.get('/login', (req, res) => {

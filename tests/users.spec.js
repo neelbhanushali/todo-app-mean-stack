@@ -30,6 +30,7 @@ describe("POST /api/users/register", () => {
     }
     const res = await request(app).post(uri).send(obj)
     expect(res.statusCode).toBe(200)
+    expect(res.body.message).toBe('Registration done')
   })
 
   it("Should return 422 for same email", async () => {
@@ -41,6 +42,10 @@ describe("POST /api/users/register", () => {
     await request(app).post(uri).send(obj)
     const res = await request(app).post(uri).send(obj)
     expect(res.statusCode).toBe(422)
+    expect(res.body.message).toBe('Validation Error')
+    expect(res.body.error.length).toBe(1)
+    expect(res.body.error[0].path).toBe('email')
+    expect(res.body.error[0].msg).toBe('Email already in use')
   })
 
   it("Validation error : firstname is required", async () => {
@@ -52,6 +57,10 @@ describe("POST /api/users/register", () => {
     await request(app).post(uri).send(obj)
     const res = await request(app).post(uri).send(obj)
     expect(res.statusCode).toBe(422)
+    expect(res.body.message).toBe('Validation Error')
+    expect(res.body.error.length).toBe(1)
+    expect(res.body.error[0].path).toBe('first_name')
+    expect(res.body.error[0].msg).toBe('First name is required')
   })
 
   it("Validation error : email is required", async () => {
@@ -63,6 +72,10 @@ describe("POST /api/users/register", () => {
     await request(app).post(uri).send(obj)
     const res = await request(app).post(uri).send(obj)
     expect(res.statusCode).toBe(422)
+    expect(res.body.message).toBe('Validation Error')
+    expect(res.body.error.length).toBe(1)
+    expect(res.body.error[0].path).toBe('email')
+    expect(res.body.error[0].msg).toBe('Email is required')
   })
 
   it("Validation error : email is required", async () => {
@@ -74,6 +87,10 @@ describe("POST /api/users/register", () => {
     await request(app).post(uri).send(obj)
     const res = await request(app).post(uri).send(obj)
     expect(res.statusCode).toBe(422)
+    expect(res.body.message).toBe('Validation Error')
+    expect(res.body.error.length).toBe(1)
+    expect(res.body.error[0].path).toBe('email')
+    expect(res.body.error[0].msg).toBe('Provide valid email')
   })
 
   it("Validation error : password is required", async () => {
@@ -85,6 +102,10 @@ describe("POST /api/users/register", () => {
     await request(app).post(uri).send(obj)
     const res = await request(app).post(uri).send(obj)
     expect(res.statusCode).toBe(422)
+    expect(res.body.message).toBe('Validation Error')
+    expect(res.body.error.length).toBe(1)
+    expect(res.body.error[0].path).toBe('password')
+    expect(res.body.error[0].msg).toBe('Password is required')
   })
 
   it("Validation error : password length minimum 6", async () => {
@@ -96,5 +117,9 @@ describe("POST /api/users/register", () => {
     await request(app).post(uri).send(obj)
     const res = await request(app).post(uri).send(obj)
     expect(res.statusCode).toBe(422)
+    expect(res.body.message).toBe('Validation Error')
+    expect(res.body.error.length).toBe(1)
+    expect(res.body.error[0].path).toBe('password')
+    expect(res.body.error[0].msg).toBe('The minimum password length is 6 characters')
   })
 });
