@@ -32,7 +32,7 @@ const registerValidator = [
   expressValidator.body('password', 'Password is required').not().isEmpty(),
   expressValidator.body('password', 'The minimum password length is 6 characters').isLength({min: 6}),
   expressValidator.check('email').custom(value => {
-    return UserModel.findOne({email: value}).then(user => {
+    return UserModel.model.findOne({email: value}).then(user => {
       if(user) {
         return Promise.reject('Email already in use')
       }
@@ -55,6 +55,8 @@ const registerValidator = [
  *    responses:
  *      200: 
  *        description: Registered user
+ *      422:
+ *        description: Validation error
  */
 router.post('/register', registerValidator, async (req, res) => {
     const errors = expressValidator.validationResult(req)
@@ -62,13 +64,14 @@ router.post('/register', registerValidator, async (req, res) => {
       return respond.withValidationError(res, error=errors.array({onlyFirstError: true}))
     }
     
-    await userService.registerUser(req.body)
+    const out = await userService.registerUser(req.body)
+    const out_ = {
+      first_name: out.first_name,
+      email: out.email,
+      _id: out._id
+    }
 
-    return respond.withSuccess(res, data=[], msg='Registration done')
-})
-
-router.get('/login', (req, res) => {
-    res.send('login done')
+    return respond.withSuccess(res, data=out_, msg='Registration done')
 })
 
 module.exports = router;
