@@ -14,8 +14,8 @@ afterEach(async () => {
   await mongoose.connection.close();
 });
 
-describe("POST /api/users/register", () => {
-  const uri = '/api/users/register'
+describe("POST /api/auth/register", () => {
+  const uri = '/api/auth/register'
   
   it("Should return 404 for Get", async () => {
     const res = await request(app).get(uri);

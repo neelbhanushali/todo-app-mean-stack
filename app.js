@@ -12,9 +12,6 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api', require('./src'))
-app.get('*', function(req, res){
-  return respond.withNotFound(res, msg='Route not found')
-});
 
 const options = {
     definition: {
@@ -44,9 +41,13 @@ const options = {
   };
 const specs = swaggerJsdoc(options);
 app.use(
-  "/api",
+  "/api-docs",
   swaggerUi.serve,
   swaggerUi.setup(specs)
 );
+
+app.get('*', function(req, res){
+  return respond.withNotFound(res, msg='Route not found')
+});
 
 module.exports = app

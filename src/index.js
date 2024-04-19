@@ -1,5 +1,5 @@
 const router = require("express").Router();
 
-router.use('/users', require('./users/users.controller'))
+router.use('/auth', require('./auth/auth.controller'))
 
 module.exports = router

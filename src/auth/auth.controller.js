@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const expressValidator = require('express-validator')
-const userService = require('./users.service')
-const UserModel = require('./users.model')
+const userService = require('./auth.service')
+const UserModel = require('../models/user')
 const respond = require('../../responder')
 
 /**
@@ -42,10 +42,10 @@ const registerValidator = [
 
 /**
  * @swagger
- * /api/users/register:
+ * /api/auth/register:
  *  post:
  *    summary: Register a user
- *    tags: [User]
+ *    tags: [Auth]
  *    requestBody:
  *      required: true
  *      content: 
