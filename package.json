@@ -1,0 +1,40 @@
+{
+  "name": "todo-app-mean-stack",
+  "version": "0.0.1",
+  "description": "todo app using mean stack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neelbhanushali/todo-app-mean-stack.git"
+  },
+  "keywords": [
+    "todo",
+    "app",
+    "mean",
+    "stack",
+    "todo",
+    "using",
+    "mean",
+    "stack"
+  ],
+  "author": "Neel Bhanushali <neal.bhanushali@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/neelbhanushali/todo-app-mean-stack/issues"
+  },
+  "homepage": "https://github.com/neelbhanushali/todo-app-mean-stack#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-validator": "^7.0.1",
+    "mongoose": "^8.3.2",
+    "nodemon": "^3.1.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
+  }
+}
