@@ -1,1 +1,34 @@
-<p>auth works!</p>
+<form [formGroup]="registrationForm" (ngSubmit)="registrationFormSubmit()">
+
+  <input type="text" formControlName="first_name" placeholder="First Name" />
+  <div *ngIf="registrationForm.get('first_name')?.invalid && (registrationForm.get('first_name')?.dirty || registrationForm.get('first_name')?.touched)">
+    <div *ngIf="registrationForm.get('first_name')?.errors?.['required']">First Name is required.</div>
+    <div *ngIf="registrationForm.get('first_name')?.errors?.['serverError']">{{registrationForm.get('first_name')?.getError('serverError')}}</div>
+  </div>
+  <br />
+
+  <input type="text" formControlName="last_name" placeholder="Last Name" />
+  <div *ngIf="registrationForm.get('last_name')?.invalid && (registrationForm.get('last_name')?.dirty || registrationForm.get('last_name')?.touched)">
+    <div *ngIf="registrationForm.get('last_name')?.errors?.['serverError']">{{registrationForm.get('last_name')?.getError('serverError')}}</div>
+  </div>
+  <br />
+
+  <input type="email" formControlName="email" placeholder="Email" />
+  <div *ngIf="registrationForm.get('email')?.invalid && (registrationForm.get('email')?.dirty || registrationForm.get('email')?.touched)">
+    <div *ngIf="registrationForm.get('email')?.errors?.['required']">Email is required.</div>
+    <div *ngIf="registrationForm.get('email')?.errors?.['email']">Enter valid email.</div>
+    <div *ngIf="registrationForm.get('email')?.errors?.['serverError']">{{registrationForm.get('email')?.getError('serverError')}}</div>
+  </div>
+  <br />
+
+  <input type="password" formControlName="password" placeholder="Password" />
+  <div *ngIf="registrationForm.get('password')?.invalid && (registrationForm.get('password')?.dirty || registrationForm.get('password')?.touched)">
+    <div *ngIf="registrationForm.get('password')?.errors?.['required']">Password is required.</div>
+    <div *ngIf="registrationForm.get('password')?.errors?.['minlength']">Password min Length 6</div>
+    <div *ngIf="registrationForm.get('password')?.errors?.['serverError']">{{registrationForm.get('password')?.getError('serverError')}}</div>
+  </div>
+  <br />
+
+  <button>Register</button>
+
+</form>

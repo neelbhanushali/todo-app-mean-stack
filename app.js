@@ -7,6 +7,7 @@ const swaggerUi = require("swagger-ui-express")
 const respond = require('./responder')
 
 app.use(express.json())
+app.use(require('cors')())
 app.get('/', (req, res) => {
   return respond.withSuccess(res, data=[], msg='Hello World!')
 })
