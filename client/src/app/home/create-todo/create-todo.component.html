@@ -1,0 +1,11 @@
+<form [formGroup]="createTodoForm" (ngSubmit)="createTodoFormSubmit()">
+
+  <input type="text" formControlName="title" placeholder="title" />
+  <div *ngIf="createTodoForm.get('title')?.invalid && (createTodoForm.get('title')?.dirty || createTodoForm.get('title')?.touched)">
+    <div *ngIf="createTodoForm.get('title')?.errors?.['required']">Title is required.</div>
+    <div *ngIf="createTodoForm.get('title')?.errors?.['serverError']">{{createTodoForm.get('title')?.getError('serverError')}}</div>
+  </div>
+  <br />
+
+  <button type="button">Create</button>
+</form>

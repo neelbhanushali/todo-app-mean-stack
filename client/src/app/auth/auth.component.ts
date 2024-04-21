@@ -55,7 +55,7 @@ export class AuthComponent {
       },
       error: (err) => {
         console.log('error', err)
-        err.error.error.forEach((e:any) => {
+        err.error.error.forEach((e: any) => {
           this.registrationForm.get(e.path)?.setErrors({
             serverError: e.msg
           })
